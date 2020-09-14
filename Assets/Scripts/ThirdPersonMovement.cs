@@ -35,7 +35,7 @@ public class ThirdPersonMovement : MonoBehaviour
             transform.localRotation = Quaternion.Euler(0.0f, angle, 0.0f);
 
             Vector3 moveDirection = Quaternion.Euler(0.0f, angle, 0.0f) * Vector3.forward;
-            playerController.Move(moveDirection * Speed * Time.deltaTime);
+            playerController.Move(moveDirection.normalized * Speed * Time.deltaTime);
         }
         
     }
