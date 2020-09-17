@@ -12,6 +12,8 @@ public class ThirdPersonMovement : MonoBehaviour
     public float turnSmoothTime = 0.1f;
     public float turnSmoothVelocity;
 
+    GameObject selectedPlant = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,6 +39,30 @@ public class ThirdPersonMovement : MonoBehaviour
             Vector3 moveDirection = Quaternion.Euler(0.0f, angle, 0.0f) * direction;
             playerController.Move(moveDirection.normalized * Speed * Time.deltaTime);
         }
+
+        if(Input.GetKeyDown(KeyCode.G))
+        {
+            if(selectedPlant != null)
+            {
+                selectedPlant.GetComponent<PlantScript>().PickUp();
+            }
+        }
         
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Plant")
+        {
+            selectedPlant = other.gameObject;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Plant")
+        {
+            selectedPlant = null;
+        }
     }
 }
