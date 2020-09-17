@@ -51,7 +51,7 @@ public class DynamicSunScript : MonoBehaviour
 
         if (Application.isPlaying)
         {
-            TimeOfDay += Time.deltaTime;
+            TimeOfDay += Time.deltaTime / 2;
             TimeOfDay %= 24;
             UpdateLighting(TimeOfDay / 24f);
         }

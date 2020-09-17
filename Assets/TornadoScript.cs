@@ -13,8 +13,13 @@ public class TornadoScript : MonoBehaviour
 
     public void Start()
     {
+        UpdateDestination();
+    }
+
+    private void UpdateDestination()
+    {
         float x, z;
-        if(transform.position.x < 0)
+        if (transform.position.x < 0)
         {
             x = Random.Range(200.0f, 300.0f);
         }
@@ -23,7 +28,7 @@ public class TornadoScript : MonoBehaviour
             x = Random.Range(-300.0f, -200.0f);
         }
 
-        if(transform.position.z < 0)
+        if (transform.position.z < 0)
         {
             z = Random.Range(200.0f, 300.0f);
         }
@@ -38,6 +43,8 @@ public class TornadoScript : MonoBehaviour
     public void FixedUpdate()
     {
         transform.position = Vector3.MoveTowards(transform.position, destination, moveSpeed * Time.deltaTime);
+        if ((destination - transform.position).magnitude < 10.0f)
+            UpdateDestination();
     }
 
     public void OnTriggerEnter(Collider other)
